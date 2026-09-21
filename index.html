@@ -102,7 +102,6 @@
             font-weight: bold;
         }
 
-        /* Checkbox Apps Selection */
         .app-selector-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -149,7 +148,6 @@
             background-color: var(--dark-green);
         }
 
-        /* App Cards */
         .app-card {
             background: var(--card-bg);
             border: 2px solid var(--border-red);
@@ -298,12 +296,12 @@
 <div class="container">
     <div class="header">
         <h1>Quản Lý Thời Gian App Của Ong 🍀✨</h1>
-        <p>Học 4:1 • Phân bổ bội số 5p • Vay 1:9 • Dồn dư 1t ➔ +30p (๑•̀ㅂ•́)o✧</p>
+        <p>Học 9:1 • Phân bổ bội số 5p • Vay 1:9 • Dồn dư 1t ➔ +30p (๑•̀ㅂ•́)o✧</p>
     </div>
 
     <!-- Quy đổi thời gian học tiếng Nhật -->
     <div class="section-card">
-        <div class="section-title">🇯🇵 Quy Đổi Học Tiếng Nhật ➔ Phút App (Tỷ lệ 4:1)</div>
+        <div class="section-title">🇯🇵 Quy Đổi Học Tiếng Nhật ➔ Phút App (Tỷ lệ 9:1)</div>
         
         <div class="form-group">
             <div>
@@ -363,7 +361,6 @@
 </div>
 
 <script>
-    // Khởi tạo dữ liệu ứng dụng
     const initialAppsData = {
         tiktok: { name: 'TikTok 🎵', default: 10, bonus: 0, manual: 0, used: 0, borrowed: 0 },
         sudoku: { name: 'Sudoku 🧩', default: 10, bonus: 0, manual: 0, used: 0, borrowed: 0 },
@@ -388,11 +385,10 @@
         const unit = document.getElementById('studyUnit').value;
         const studyMins = unit === 'hours' ? Math.round(val * 60) : val;
 
-        // Tỷ lệ 4:1 & làm tròn xuống bội số của 5
-        let studyBonus = Math.floor(studyMins / 4);
+        // Tỷ lệ học mới 9:1 & làm tròn xuống bội số của 5
+        let studyBonus = Math.floor(studyMins / 9);
         studyBonus = Math.floor(studyBonus / 5) * 5; 
 
-        // Thưởng mốc % Kế hoạch & Thói quen (Cũng là bội số 5)
         const planPercent = parseInt(document.getElementById('planPercent').value) || 0;
         const habitPercent = parseInt(document.getElementById('habitPercent').value) || 0;
         const planBonus = getGoalBonus(planPercent);
@@ -400,7 +396,6 @@
 
         const totalBonus = studyBonus + planBonus + habitBonus;
 
-        // Lấy danh sách app được tick chọn
         let selectedKeys = [];
         if (document.getElementById('chk_tiktok').checked) selectedKeys.push('tiktok');
         if (document.getElementById('chk_sudoku').checked) selectedKeys.push('sudoku');
@@ -412,14 +407,12 @@
             return;
         }
 
-        // Reset phần thưởng quy đổi hiện tại
         Object.keys(apps).forEach(key => apps[key].bonus = 0);
 
         const distMode = document.getElementById('distMode').value;
-        let totalSteps = Math.floor(totalBonus / 5); // Tổng số block 5 phút
+        let totalSteps = Math.floor(totalBonus / 5);
 
         if (distMode === 'even') {
-            // Chia đều theo từng block 5 phút, phần dư tự do phân bổ cho các app đầu
             let baseStepsPerApp = Math.floor(totalSteps / selectedKeys.length);
             let remSteps = totalSteps % selectedKeys.length;
 
@@ -428,7 +421,6 @@
                 apps[key].bonus = appSteps * 5;
             });
         } else if (distMode === 'random') {
-            // Phân bổ ngẫu nhiên theo từng block 5 phút
             let allocSteps = new Array(selectedKeys.length).fill(0);
             for (let i = 0; i < totalSteps; i++) {
                 let r = Math.floor(Math.random() * selectedKeys.length);
@@ -439,11 +431,10 @@
             });
         }
 
-        // Hiển thị thông báo kết quả
         const resBox = document.getElementById('resultBox');
         resBox.style.display = 'block';
         resBox.innerHTML = `🎉 <b>KẾT QUẢ QUY ĐỔI & PHÂN BỔ:</b><br>` +
-            `• Học tiếng Nhật (${studyMins} phút ➔ tỷ lệ 4:1): +${studyBonus}p<br>` +
+            `• Học tiếng Nhật (${studyMins} phút ➔ tỷ lệ 9:1): +${studyBonus}p<br>` +
             `• Kế hoạch (${planPercent}%): +${planBonus}p | Thói quen (${habitPercent}%): +${habitBonus}p<br>` +
             `➔ <b>Tổng thưởng: +${totalBonus} phút!</b> *(Phân bổ bội số 5p tới ${selectedKeys.length} App đã chọn)* (⁠≧⁠▽⁠≦⁠)`;
 
@@ -486,7 +477,7 @@
         Object.keys(apps).forEach(key => {
             const app = apps[key];
             const totalMins = calculateAppTotal(app);
-            const tomorrowDeduct = app.borrowed * 9; // Tỷ lệ vay 1:9
+            const tomorrowDeduct = app.borrowed * 9;
 
             const cardHtml = `
                 <div class="app-card">
@@ -540,7 +531,7 @@
         alert(`🌙 KẾT THÚC NGÀY! 🍀\n\n` +
               `• Tổng thời gian giải trí còn dư: ${totalLeftover} phút (${hoursLeft} tiếng ${minsRemaining} phút)\n` +
               `• Thưởng gộp dư (1 tiếng dư ➔ +30p thưởng): +${bonusTomorrow} phút cho ngày mai! 🏆✨\n\n` +
-              `Chúc bạn nghỉ ngơi vui vẻ và ngày mai tiếp tục học tiếng Nhật hăng say nhé! ( •̀ ω •́ )✧`);
+              `Chúc bạn nghỉ ngơi vui vẻ và tiếp tục giữ vững kỷ luật cao độ nhé! ( •̀ ω •́ )✧`);
     }
 
     function resetAll() {
@@ -551,7 +542,6 @@
         }
     }
 
-    // Load ban đầu
     renderApps();
 </script>
 
