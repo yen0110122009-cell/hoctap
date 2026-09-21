@@ -3,392 +3,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng Quản Lý Thời Gian App - Ong 🍀🍓</title>
+    <title>Quản Lý Thời Gian App Của Ong 🍀</title>
     <style>
         :root {
-            --bright-red: #ff3838;
-            --red-hover: #ff4d4d;
-            --bright-green: #2ed573;
-            --green-hover: #26af5f;
-            --bg-color: #f7fff7;
+            --bg-color: #f4fbf5;
             --card-bg: #ffffff;
-            --text-color: #2f3542;
-            --border-red: #ff7878;
-            --border-green: #7bed9f;
+            --bright-red: #ff3333;
+            --dark-red: #cc0000;
+            --light-red: #ffe6e6;
+            --border-red: #ff8080;
+            --bright-green: #00cc44;
+            --dark-green: #00882d;
+            --light-green: #e6ffe6;
+            --border-green: #66ff99;
+            --text-main: #222222;
+            --text-sub: #555555;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f0fff4 0%, #fff0f0 100%);
-            color: var(--text-color);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 15px;
+            padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h1 {
-            color: var(--bright-red);
-            text-align: center;
-            font-size: 1.6rem;
-            margin-bottom: 4px;
-            text-shadow: 1px 1px 2px rgba(255, 56, 56, 0.15);
-        }
-
-        p.subtitle {
-            font-size: 0.85rem;
-            color: #2ed573;
-            font-weight: 600;
-            margin-top: 0;
-            margin-bottom: 15px;
-            text-align: center;
-            background: #ffffff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid var(--border-green);
-            box-shadow: 0 2px 8px rgba(46, 213, 115, 0.15);
+            justify-content: center;
         }
 
         .container {
             width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .converter-card {
+            max-width: 550px;
             background: #ffffff;
+            padding: 20px;
             border-radius: 16px;
-            padding: 16px;
-            border: 2px solid var(--bright-green);
-            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.2);
+            box-shadow: 0 6px 20px rgba(0,204,68,0.15);
+            border: 2px solid var(--border-green);
         }
 
-        .converter-title {
-            font-size: 1.05rem;
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--bright-red);
+            font-size: 24px;
+            margin: 0 0 6px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 13px;
+            color: var(--dark-green);
             font-weight: bold;
-            color: #26af5f;
-            margin-bottom: 8px;
+            margin: 0;
         }
 
-        .converter-desc {
-            font-size: 0.8rem;
-            color: #57606f;
-            margin-bottom: 10px;
-            background: #f0fff4;
-            padding: 8px;
-            border-radius: 8px;
-            border-left: 4px solid var(--bright-green);
-            line-height: 1.4;
+        .section-card {
+            background: var(--light-green);
+            border: 2px solid var(--border-green);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 18px;
         }
 
-        .converter-row {
+        .section-title {
+            font-weight: bold;
+            font-size: 15px;
+            color: var(--dark-green);
+            margin-bottom: 12px;
             display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
+            align-items: center;
+            gap: 6px;
         }
 
-        select, input[type="number"] {
-            padding: 8px;
-            border: 1.5px solid #a4b0be;
+        .form-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-sub);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #bbb;
             border-radius: 8px;
-            outline: none;
-            font-size: 0.9rem;
+            box-sizing: border-box;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Checkbox Apps Selection */
+        .app-selector-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-green);
+            margin-bottom: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 15px;
         }
 
         .btn-convert {
-            background: var(--bright-green);
+            background-color: var(--bright-green);
             color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            width: 100%;
+            box-shadow: 0 3px 8px rgba(0,204,68,0.3);
         }
-        .btn-convert:hover { background: var(--green-hover); }
 
+        .btn-convert:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* App Cards */
         .app-card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 4px 15px rgba(255, 56, 56, 0.15);
             border: 2px solid var(--border-red);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(255,51,51,0.08);
         }
 
         .app-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px dashed var(--border-red);
-            padding-bottom: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .app-title {
-            font-size: 1.1rem;
+            font-size: 17px;
             font-weight: bold;
             color: var(--bright-red);
         }
 
-        .app-time-main {
-            font-size: 1.4rem;
+        .app-time-badge {
+            background: var(--light-green);
+            color: var(--dark-green);
+            border: 2px solid var(--bright-green);
+            padding: 4px 14px;
+            border-radius: 14px;
             font-weight: bold;
-            color: var(--bright-green);
-            background: #f0fff4;
-            padding: 2px 10px;
-            border-radius: 12px;
-            border: 1px solid var(--border-green);
+            font-size: 17px;
         }
 
-        .time-breakdown {
-            font-size: 0.78rem;
-            color: #57606f;
+        .app-details {
+            font-size: 11px;
+            color: var(--text-sub);
+            line-height: 1.6;
             margin-bottom: 10px;
-            background: #fff5f5;
-            padding: 8px 10px;
-            border-radius: 8px;
-            line-height: 1.4;
+            background: var(--light-red);
+            padding: 6px 10px;
+            border-radius: 6px;
         }
 
-        .action-group {
+        .quick-add {
             display: flex;
-            flex-wrap: wrap;
             gap: 6px;
             margin-bottom: 10px;
+            align-items: center;
         }
 
-        button {
-            border: none;
-            border-radius: 8px;
-            padding: 7px 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
+        .quick-add label {
+            font-size: 11px;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 11px;
+            border: 1px solid var(--bright-green);
+            background: var(--light-green);
+            color: var(--dark-green);
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-weight: bold;
         }
 
-        .btn-add { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .btn-add:hover { background: #c3e6cb; }
+        .btn-small:hover {
+            background: var(--bright-green);
+            color: white;
+        }
 
-        .btn-sub { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; flex: 1; }
-        .btn-sub:hover { background: #f5c6cb; }
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
 
-        .btn-borrow { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; flex: 1; }
-        .btn-borrow:hover { background: #ffeeba; }
-
-        .input-inline {
+        .input-btn-group {
             display: flex;
-            gap: 6px;
-            margin-top: 6px;
-            width: 100%;
+            gap: 4px;
         }
 
-        .global-actions {
-            margin-top: 15px;
+        .input-btn-group input {
+            width: 60px;
+            padding: 4px 6px;
+            font-size: 12px;
+        }
+
+        .btn-sub {
+            background: var(--light-red);
+            color: var(--dark-red);
+            border: 1px solid var(--border-red);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            flex-grow: 1;
+            font-weight: bold;
+        }
+
+        .btn-borrow {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            flex-grow: 1;
+            font-weight: bold;
+        }
+
+        .footer-actions {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            width: 100%;
-            max-width: 500px;
+            margin-top: 20px;
         }
 
-        .btn-main-green {
+        .btn-end-day {
             background: var(--bright-green);
             color: white;
-            padding: 12px;
-            font-size: 0.95rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(46, 213, 115, 0.3);
         }
-        .btn-main-green:hover { background: var(--green-hover); }
 
-        .btn-main-red {
-            background: #747d8c;
+        .btn-reset {
+            background: var(--bright-red);
             color: white;
-            padding: 12px;
-            font-size: 0.95rem;
-            border-radius: 12px;
+        }
+
+        .result-box {
+            background: #ffffff;
+            border: 2px dashed var(--bright-green);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--dark-green);
+            margin-top: 10px;
+            display: none;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <h1>🍓 Quản Lý Thời Gian App Của Ong 🍀</h1>
-    <p class="subtitle">Học 3:1 • Gộp dư 1 tiếng +30p Thưởng • Vay phạt 1:3 (Vay 3p nhận 1p) (๑•̀ㅂ•́)و✧</p>
+<div class="container">
+    <div class="header">
+        <h1>Quản Lý Thời Gian App Của Ong 🍀✨</h1>
+        <p>Học 4:1 • Phân bổ bội số 5p • Vay 1:9 • Dồn dư 1t ➔ +30p (๑•̀ㅂ•́)o✧</p>
+    </div>
 
-    <div class="container">
-        <!-- Khung quy đổi từ thời gian học -->
-        <div class="converter-card">
-            <div class="converter-title">📖 Quy Đổi Thời Gian Học ➔ App (Tỷ lệ 3:1)</div>
-            <div class="converter-desc">
-                💡 Cứ mỗi <b>15 phút học tập trung</b> Ong sẽ nhận được <b>+5 phút</b> vào app lựa chọn!
+    <!-- Quy đổi thời gian học tiếng Nhật -->
+    <div class="section-card">
+        <div class="section-title">🇯🇵 Quy Đổi Học Tiếng Nhật ➔ Phút App (Tỷ lệ 4:1)</div>
+        
+        <div class="form-group">
+            <div>
+                <label>⏱️ Thời gian đã học tập:</label>
+                <input type="number" id="studyVal" placeholder="Nhập số..." value="3" min="0" step="0.5">
             </div>
-            <div class="converter-row">
-                <input type="number" id="studyMinutesInput" placeholder="Số phút học (15, 30, 45...)" style="flex: 2;" min="15" step="15">
-                <select id="studyAppSelect" style="flex: 2;">
-                    <option value="TikTok 🎵">TikTok 🎵</option>
-                    <option value="Sudoku 🧩">Sudoku 🧩</option>
-                    <option value="Killer Sudoku 🔢">Killer Sudoku 🔢</option>
-                    <option value="Nonogram 🖼️">Nonogram 🖼️</option>
+            <div>
+                <label>Đơn vị:</label>
+                <select id="studyUnit">
+                    <option value="hours">Tiếng (Giờ)</option>
+                    <option value="mins">Phút</option>
                 </select>
             </div>
-            <button class="btn-convert" onclick="convertStudyTime()">🌱 Quy Đổi Thưởng Phút App ✨</button>
         </div>
 
-        <div id="appContainer" style="display:flex; flex-direction:column; gap:15px;"></div>
+        <div class="form-group">
+            <div>
+                <label>📋 Kế hoạch hàng ngày (%):</label>
+                <input type="number" id="planPercent" value="50" min="0" max="100">
+            </div>
+            <div>
+                <label>🌱 Thói quen hàng ngày (%):</label>
+                <input type="number" id="habitPercent" value="50" min="0" max="100">
+            </div>
+        </div>
+
+        <label>🎯 Chọn các App muốn nhận phân bổ thưởng:</label>
+        <div class="app-selector-grid">
+            <label class="checkbox-item"><input type="checkbox" id="chk_tiktok"> TikTok 🎵</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk_sudoku" checked> Sudoku 🧩</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk_killer" checked> Killer Sudoku 🔢</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk_nonogram" checked> Nonogram 🖼️</label>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+            <label>⚙️ Kiểu phân bổ phút thưởng (Chỉ cộng bội số 5):</label>
+            <select id="distMode">
+                <option value="even">Chia đều (Tự động cân đối bước 5p khi lẻ)</option>
+                <option value="random">Tự do / Ngẫu nhiên (Chia ngẫu nhiên nấc 5p)</option>
+            </select>
+        </div>
+
+        <button class="btn btn-convert" onclick="calculateAndDistribute()">✨ Quy Đổi & Phân Bổ Ngay 🍀</button>
+        <div id="resultBox" class="result-box"></div>
     </div>
 
-    <div class="global-actions">
-        <button class="btn-main-green" onclick="nextDayRollover()">🌙 Kết Thúc Ngày (Gộp dư: 1 tiếng dư ➔ +30p Thưởng) ✨</button>
-        <button class="btn-main-red" onclick="resetAll()">🔄 Reset Tất Cả Về Mặc Định 10p</button>
+    <!-- Danh Sách App -->
+    <div id="appList">
+        <!-- Render bằng JS -->
     </div>
 
-    <script>
-        const DEFAULT_APPS = {
-            'TikTok 🎵': { base: 10, bonus: 0, used: 0, rollover: 0, borrowedDeduction: 0, borrowedUsable: 0 },
-            'Sudoku 🧩': { base: 10, bonus: 0, used: 0, rollover: 0, borrowedDeduction: 0, borrowedUsable: 0 },
-            'Killer Sudoku 🔢': { base: 10, bonus: 0, used: 0, rollover: 0, borrowedDeduction: 0, borrowedUsable: 0 },
-            'Nonogram 🖼️': { base: 10, bonus: 0, used: 0, rollover: 0, borrowedDeduction: 0, borrowedUsable: 0 }
-        };
+    <!-- Thao tác ngày -->
+    <div class="footer-actions">
+        <button class="btn btn-end-day" onclick="endDay()">🌙 Kết Thúc Ngày (Gộp dư 1 tiếng ➔ +30p Thưởng) 🍀</button>
+        <button class="btn btn-reset" onclick="resetAll()">🔄 Reset Tất Cả Mặc Định 10 Phút</button>
+    </div>
+</div>
 
-        let data = JSON.parse(localStorage.getItem('ong_app_time_v4')) || JSON.parse(JSON.stringify(DEFAULT_APPS));
+<script>
+    // Khởi tạo dữ liệu ứng dụng
+    const initialAppsData = {
+        tiktok: { name: 'TikTok 🎵', default: 10, bonus: 0, manual: 0, used: 0, borrowed: 0 },
+        sudoku: { name: 'Sudoku 🧩', default: 10, bonus: 0, manual: 0, used: 0, borrowed: 0 },
+        killer_sudoku: { name: 'Killer Sudoku 🔢', default: 10, bonus: 0, manual: 0, used: 0, borrowed: 0 },
+        nonogram: { name: 'Nonogram 🖼️', default: 10, bonus: 0, manual: 0, used: 0, borrowed: 0 }
+    };
 
-        function saveData() {
-            localStorage.setItem('ong_app_time_v4', JSON.stringify(data));
-            render();
+    let apps = JSON.parse(JSON.stringify(initialAppsData));
+
+    function getGoalBonus(percent) {
+        if (percent < 30) return 0;
+        if (percent < 50) return 5;
+        if (percent < 60) return 10;
+        if (percent < 70) return 15;
+        if (percent < 80) return 20;
+        if (percent < 90) return 25;
+        return 30; // 90% - 100%
+    }
+
+    function calculateAndDistribute() {
+        const val = parseFloat(document.getElementById('studyVal').value) || 0;
+        const unit = document.getElementById('studyUnit').value;
+        const studyMins = unit === 'hours' ? Math.round(val * 60) : val;
+
+        // Tỷ lệ 4:1 & làm tròn xuống bội số của 5
+        let studyBonus = Math.floor(studyMins / 4);
+        studyBonus = Math.floor(studyBonus / 5) * 5; 
+
+        // Thưởng mốc % Kế hoạch & Thói quen (Cũng là bội số 5)
+        const planPercent = parseInt(document.getElementById('planPercent').value) || 0;
+        const habitPercent = parseInt(document.getElementById('habitPercent').value) || 0;
+        const planBonus = getGoalBonus(planPercent);
+        const habitBonus = getGoalBonus(habitPercent);
+
+        const totalBonus = studyBonus + planBonus + habitBonus;
+
+        // Lấy danh sách app được tick chọn
+        let selectedKeys = [];
+        if (document.getElementById('chk_tiktok').checked) selectedKeys.push('tiktok');
+        if (document.getElementById('chk_sudoku').checked) selectedKeys.push('sudoku');
+        if (document.getElementById('chk_killer').checked) selectedKeys.push('killer_sudoku');
+        if (document.getElementById('chk_nonogram').checked) selectedKeys.push('nonogram');
+
+        if (selectedKeys.length === 0) {
+            alert("Bạn vui lòng tick chọn ít nhất 1 App để nhận phân bổ thời gian nhé! (｡•́‿•̀｡)");
+            return;
         }
 
-        function calculateTotal(app) {
-            const item = data[app];
-            return item.base + item.bonus + item.rollover + item.borrowedUsable - item.used;
-        }
+        // Reset phần thưởng quy đổi hiện tại
+        Object.keys(apps).forEach(key => apps[key].bonus = 0);
 
-        function convertStudyTime() {
-            const studyInput = document.getElementById('studyMinutesInput');
-            const studyMins = parseInt(studyInput.value);
-            const selectedApp = document.getElementById('studyAppSelect').value;
+        const distMode = document.getElementById('distMode').value;
+        let totalSteps = Math.floor(totalBonus / 5); // Tổng số block 5 phút
 
-            if (!studyMins || studyMins < 15) {
-                alert("Ong hãy nhập số phút học từ 15 phút trở lên nhé! 🍀");
-                return;
+        if (distMode === 'even') {
+            // Chia đều theo từng block 5 phút, phần dư tự do phân bổ cho các app đầu
+            let baseStepsPerApp = Math.floor(totalSteps / selectedKeys.length);
+            let remSteps = totalSteps % selectedKeys.length;
+
+            selectedKeys.forEach((key, index) => {
+                let appSteps = baseStepsPerApp + (index < remSteps ? 1 : 0);
+                apps[key].bonus = appSteps * 5;
+            });
+        } else if (distMode === 'random') {
+            // Phân bổ ngẫu nhiên theo từng block 5 phút
+            let allocSteps = new Array(selectedKeys.length).fill(0);
+            for (let i = 0; i < totalSteps; i++) {
+                let r = Math.floor(Math.random() * selectedKeys.length);
+                allocSteps[r]++;
             }
-
-            const blocks = Math.floor(studyMins / 15);
-            const bonusMins = blocks * 5;
-
-            data[selectedApp].bonus += bonusMins;
-            saveData();
-
-            alert(`🎉 Ong học ${blocks * 15} phút ➔ Được +${bonusMins} phút vào ${selectedApp}! (๑•̀ㅂ•́)و✧`);
-            studyInput.value = '';
+            selectedKeys.forEach((key, index) => {
+                apps[key].bonus = allocSteps[index] * 5;
+            });
         }
 
-        function addBonus(app, minutes) {
-            data[app].bonus += minutes;
-            saveData();
+        // Hiển thị thông báo kết quả
+        const resBox = document.getElementById('resultBox');
+        resBox.style.display = 'block';
+        resBox.innerHTML = `🎉 <b>KẾT QUẢ QUY ĐỔI & PHÂN BỔ:</b><br>` +
+            `• Học tiếng Nhật (${studyMins} phút ➔ tỷ lệ 4:1): +${studyBonus}p<br>` +
+            `• Kế hoạch (${planPercent}%): +${planBonus}p | Thói quen (${habitPercent}%): +${habitBonus}p<br>` +
+            `➔ <b>Tổng thưởng: +${totalBonus} phút!</b> *(Phân bổ bội số 5p tới ${selectedKeys.length} App đã chọn)* (⁠≧⁠▽⁠≦⁠)`;
+
+        renderApps();
+    }
+
+    function addManual(appKey, mins) {
+        apps[appKey].manual += mins;
+        renderApps();
+    }
+
+    function subUsed(appKey) {
+        const input = document.getElementById(`used_input_${appKey}`);
+        const val = parseInt(input.value) || 0;
+        if (val > 0) {
+            apps[appKey].used += val;
+            input.value = '';
+            renderApps();
         }
+    }
 
-        function useTime(app, minutes) {
-            if (!minutes || minutes <= 0) return;
-            data[app].used += minutes;
-            saveData();
+    function borrowTime(appKey) {
+        const input = document.getElementById(`borrow_input_${appKey}`);
+        const val = parseInt(input.value) || 0;
+        if (val > 0) {
+            apps[appKey].borrowed += val;
+            input.value = '';
+            renderApps();
         }
+    }
 
-        function borrowTime(app, minutesToBorrowFromTomorrow) {
-            if (!minutesToBorrowFromTomorrow || minutesToBorrowFromTomorrow <= 0) return;
-            
-            const usableTime = Math.floor(minutesToBorrowFromTomorrow / 3);
-            if (usableTime < 1) {
-                alert("Ong cần vay ít nhất 3 phút từ ngày mai để đổi lấy 1 phút sử dụng hôm nay nhé! ⚠️");
-                return;
-            }
+    function calculateAppTotal(app) {
+        return app.default + app.bonus + app.manual + app.borrowed - app.used;
+    }
 
-            data[app].borrowedDeduction += minutesToBorrowFromTomorrow;
-            data[app].borrowedUsable += usableTime;
+    function renderApps() {
+        const container = document.getElementById('appList');
+        container.innerHTML = '';
 
-            saveData();
-            alert(`⚠️ Ong đã rút ${minutesToBorrowFromTomorrow}p của ngày mai ➔ Hôm nay nhận được +${usableTime}p chơi app! (Tỷ lệ phạt 1:3)`);
-        }
+        Object.keys(apps).forEach(key => {
+            const app = apps[key];
+            const totalMins = calculateAppTotal(app);
+            const tomorrowDeduct = app.borrowed * 9; // Tỷ lệ vay 1:9
 
-        function nextDayRollover() {
-            if (!confirm("Ong có chắc muốn chốt ngày hôm nay không? 🍀")) return;
-            
-            for (let app in data) {
-                let totalLeft = calculateTotal(app);
-                let borrowDeduction = data[app].borrowedDeduction;
-
-                let netLeft = Math.max(0, totalLeft - borrowDeduction);
-                
-                // Quy tắc mới: Cứ 60 phút (1 tiếng) dư sẽ thưởng thêm +30 phút
-                let hourBlocks = Math.floor(netLeft / 60);
-                let bonusFromHours = hourBlocks * 30;
-
-                let nextRollover = netLeft + bonusFromHours;
-
-                data[app].rollover = nextRollover;
-                data[app].bonus = 0;
-                data[app].used = 0;
-                data[app].borrowedDeduction = 0;
-                data[app].borrowedUsable = 0;
-            }
-            saveData();
-            alert("🎉 Chốt ngày thành công! Cứ 1 tiếng dư đã được tự động thưởng +30 phút chuyển sang ngày mới rồi nhé! (๑•̀◡•́)g 🍀");
-        }
-
-        function resetAll() {
-            if (confirm("Reset toàn bộ dữ liệu về mặc định ban đầu?")) {
-                data = JSON.parse(JSON.stringify(DEFAULT_APPS));
-                saveData();
-            }
-        }
-
-        function render() {
-            const container = document.getElementById('appContainer');
-            container.innerHTML = '';
-
-            for (let app in data) {
-                const item = data[app];
-                const total = calculateTotal(app);
-
-                const card = document.createElement('div');
-                card.className = 'app-card';
-                card.innerHTML = `
+            const cardHtml = `
+                <div class="app-card">
                     <div class="app-header">
-                        <span class="app-title">${app}</span>
-                        <span class="app-time-main">${total} phút</span>
+                        <span class="app-title">${app.name}</span>
+                        <span class="app-time-badge">${totalMins} phút</span>
                     </div>
-                    <div class="time-breakdown">
-                        📌 Mặc định: ${item.base}p | 🎁 Thưởng học: +${item.bonus}p | 🌙 Gộp dư (1 tiếng +30p): ${item.rollover >= 0 ? '+' : ''}${item.rollover}p | 🚀 Vay nhận: +${item.borrowedUsable}p (Ngày mai trừ: -${item.borrowedDeduction}p) | ⌛ Đã dùng: -${item.used}p
+                    <div class="app-details">
+                        📌 Mặc định: ${app.default}p | 🎁 Thưởng: +${app.bonus + app.manual}p 
+                        | ⚠ Vay nhận: +${app.borrowed}p (Mai trừ: -${tomorrowDeduct}p) 
+                        | ⌛ Đã dùng: -${app.used}p
                     </div>
                     
-                    <div style="font-size:0.85rem; font-weight:bold; margin-bottom:4px;">➕ Thưởng thủ công:</div>
-                    <div class="action-group">
-                        <button class="btn-add" onclick="addBonus('${app}', 5)">+5p</button>
-                        <button class="btn-add" onclick="addBonus('${app}', 10)">+10p</button>
-                        <button class="btn-add" onclick="addBonus('${app}', 15)">+15p</button>
-                        <button class="btn-add" onclick="addBonus('${app}', 20)">+20p</button>
+                    <div class="quick-add">
+                        <label>➕ Thưởng thủ công:</label>
+                        <button class="btn-small" onclick="addManual('${key}', 5)">+5p</button>
+                        <button class="btn-small" onclick="addManual('${key}', 10)">+10p</button>
+                        <button class="btn-small" onclick="addManual('${key}', 15)">+15p</button>
+                        <button class="btn-small" onclick="addManual('${key}', 20)">+20p</button>
                     </div>
 
-                    <div class="input-inline">
-                        <input type="number" id="use-${app}" placeholder="Số phút" min="1">
-                        <button class="btn-sub" onclick="useTime('${app}', parseInt(document.getElementById('use-${app}').value))">➖ Trừ phút đã chơi</button>
+                    <div class="action-row">
+                        <div class="input-btn-group">
+                            <input type="number" id="used_input_${key}" placeholder="Phút">
+                            <button class="btn-sub" onclick="subUsed('${key}')">➖ Trừ đã chơi</button>
+                        </div>
+                        <div class="input-btn-group">
+                            <input type="number" id="borrow_input_${key}" placeholder="Phút">
+                            <button class="btn-borrow" onclick="borrowTime('${key}')">⚠ Vay (Tỷ lệ 1:9)</button>
+                        </div>
                     </div>
+                </div>
+            `;
+            container.innerHTML += cardHtml;
+        });
+    }
 
-                    <div class="input-inline">
-                        <input type="number" id="borrow-${app}" placeholder="Rút phút ngày mai" min="3" step="3">
-                        <button class="btn-borrow" onclick="borrowTime('${app}', parseInt(document.getElementById('borrow-${app}').value))">⚠️ Vay ngày mai (Tỷ lệ 1:3)</button>
-                    </div>
-                `;
-                container.appendChild(card);
+    function endDay() {
+        let totalLeftover = 0;
+        Object.keys(apps).forEach(key => {
+            let currentMins = calculateAppTotal(apps[key]);
+            if (currentMins > 0) {
+                totalLeftover += currentMins;
             }
-        }
+        });
 
-        render();
-    </script>
+        let hoursLeft = Math.floor(totalLeftover / 60);
+        let bonusTomorrow = hoursLeft * 30;
+        let minsRemaining = totalLeftover % 60;
+
+        alert(`🌙 KẾT THÚC NGÀY! 🍀\n\n` +
+              `• Tổng thời gian giải trí còn dư: ${totalLeftover} phút (${hoursLeft} tiếng ${minsRemaining} phút)\n` +
+              `• Thưởng gộp dư (1 tiếng dư ➔ +30p thưởng): +${bonusTomorrow} phút cho ngày mai! 🏆✨\n\n` +
+              `Chúc bạn nghỉ ngơi vui vẻ và ngày mai tiếp tục học tiếng Nhật hăng say nhé! ( •̀ ω •́ )✧`);
+    }
+
+    function resetAll() {
+        if (confirm("Bạn có chắc muốn Reset tất cả các App về mặc định 10 phút không? 🍀")) {
+            apps = JSON.parse(JSON.stringify(initialAppsData));
+            document.getElementById('resultBox').style.display = 'none';
+            renderApps();
+        }
+    }
+
+    // Load ban đầu
+    renderApps();
+</script>
+
 </body>
 </html>
